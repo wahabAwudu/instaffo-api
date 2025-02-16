@@ -138,4 +138,4 @@ After running the command, you can inspect the coverage report inside the `htmlc
 
 ## API Documentation
 
-Install [localhost:8000/docs](localhost:8000/docs)
+Visit [localhost:8000/docs](http://localhost:8000/docs)
