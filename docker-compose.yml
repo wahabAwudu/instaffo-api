@@ -1,0 +1,53 @@
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0
+    container_name: instaffo-es
+    ports:
+      - "127.0.0.1:9200:9200"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - script.painless.regex.enabled=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      nproc: 4096
+      nofile: 65536
+
+  seed:
+    image: seed
+    build:
+      context: ./seed_image
+      args:
+        ES_URL: http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    entrypoint: /bin/sh
+    command: >
+      -c "sleep 30 && python populate_es_indices.py"
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.17.0
+    container_name: instaffo-kibana
+    environment:
+      SERVER_NAME: localhost
+      ELASTICSEARCH_URL: http://elasticsearch:9200/
+    ports:
+      - 127.0.0.1:5601:5601
+    depends_on:
+      - elasticsearch
+
+  api:
+    build:
+      context: .
+      # dockerfile: Dockerfile
+    container_name: instaffo-api
+    command: bash -c "sh ./serve.sh"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env
+    restart: unless-stopped
+    depends_on:
+      - elasticsearch
