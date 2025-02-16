@@ -41,10 +41,9 @@ Install [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-i
 
 ### Installing Docker Compose
 
-#### **For Linux**
-```bash
-sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+Install [Docker Compose](https://docs.docker.com/compose/install/).
+
+
 ```
 Verify installation:
 ```bash
