@@ -39,7 +39,7 @@ services:
   api:
     build:
       context: .
-      # dockerfile: Dockerfile
+      dockerfile: Dockerfile
     container_name: instaffo-api
     command: bash -c "sh ./serve.sh"
     volumes:

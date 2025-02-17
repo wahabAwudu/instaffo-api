@@ -55,22 +55,25 @@ docker-compose --version
 ## Project Structure
 
 ```plaintext
-app/
-│── config.py     # Configuration settings
-│── main.py       # Entry point of the FastAPI application
-│── schemas.py    # Pydantic models for request and response validation
-│── services.py   # Business logic and service functions
-│── test_main.py  # Test cases for API endpoints and validators
-es_lib/ # Reference login for elastic search.
-htmlcov/ # Project tests coverage report.
-seed_image/ # Seed data for elastic search.
-_es_example.py    # Elastic search query examples.
-docker-compose.yml # Docker compose configuration.
-Dockerfile    # Docker image configuration.
-INSTRUCTIONS.me # Initial project instructions.
-pyproject.toml   # Poetry dependency management file
-README.md # Project details and setup instructions.
-serve.sh # Application server script.
+app/  
+│── config.py         # Configuration settings  
+│── main.py           # Entry point of the FastAPI application  
+│── schemas.py        # Pydantic models for request and response validation  
+│── services.py       # Business logic and service functions  
+│── tests/  
+│   ├── test_main.py       # Test cases for API endpoints  
+│   ├── test_services.py   # Test cases for service validators  
+│  
+es_lib/               # Reference logic for Elasticsearch  
+htmlcov/              # Project test coverage report  
+seed_image/           # Seed data for Elasticsearch  
+_es_example.py        # Elasticsearch query examples  
+docker-compose.yml    # Docker Compose configuration  
+Dockerfile            # Docker image configuration  
+INSTRUCTIONS.me       # Initial project instructions  
+pyproject.toml        # Poetry dependency management file  
+README.md             # Project details and setup instructions  
+serve.sh              # Application server script  
 ```
 
 ---
@@ -115,12 +118,12 @@ docker-compose down
 
 ### 1️⃣ Running Tests inside the API Container
 ```bash
-docker exec -it api pytest
+docker exec -it instaffo-api pytest
 ```
 
 ### 2️⃣ Running Tests with Coverage Report
 ```bash
-docker exec -it api pytest --cov=app --cov-report=term-missing
+docker exec -it instaffo-api pytest --cov=app --cov-report=term-missing
 ```
 
 ---

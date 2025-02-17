@@ -1,4 +1,3 @@
-from elasticsearch import Elasticsearch
 from typing import Dict, List, Optional
 from fastapi import HTTPException
 from app.config import get_es_client
@@ -7,6 +6,7 @@ REQUIRED_FILTERS = {"salary_match", "top_skill_match", "seniority_match"}
 
 # Initialize Elasticsearch client
 es = get_es_client()
+
 
 def get_document_by_id(index: str, doc_id: int) -> Optional[Dict]:
     """
